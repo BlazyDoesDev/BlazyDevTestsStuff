@@ -5,4 +5,8 @@ print("Hello World!")
 # And copy this file  to the new folder you just made, and edit it with the solution 
 
 
-print("Hello World!"
+print("This is a test to see how good devloper you are"
+
+
+# If done correctly -- It will print "This is a test to see how good devloper you are" to the console when run with the cmd python!
+      
