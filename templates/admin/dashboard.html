@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <h2>Cellar Management</h2>
+  <p>Add new brews, adjust listings, and keep the tavern stocked.</p>
+</section>
+
+<section class="card">
+  <h3>Add a new beer</h3>
+  <form method="post">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" required />
+    </div>
+    <div>
+      <label for="style">Style</label>
+      <input id="style" name="style" required />
+    </div>
+    <div>
+      <label for="abv">ABV</label>
+      <input id="abv" name="abv" type="number" step="0.1" />
+    </div>
+    <div>
+      <label for="rating">Rating (1-5)</label>
+      <input id="rating" name="rating" type="number" min="1" max="5" />
+    </div>
+    <div>
+      <label for="tavern">Tavern</label>
+      <input id="tavern" name="tavern" placeholder="Dragon's Flagon" />
+    </div>
+    <div>
+      <label for="image_url">Image URL</label>
+      <input id="image_url" name="image_url" type="url" />
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="description"></textarea>
+    </div>
+    <button type="submit">Add Brew</button>
+  </form>
+</section>
+
+<section>
+  <h3>Current tap list</h3>
+  {% if beers %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Style</th>
+          <th>ABV</th>
+          <th>Tavern</th>
+          <th>Rating</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for beer in beers %}
+          <tr>
+            <td>{{ beer.name }}</td>
+            <td>{{ beer.style }}</td>
+            <td>{{ beer.abv or "-" }}</td>
+            <td>{{ beer.tavern or "-" }}</td>
+            <td>{{ beer.rating or "-" }}</td>
+            <td>
+              <a class="button secondary" href="{{ url_for('admin_edit_beer', beer_id=beer.id) }}">Edit</a>
+              <form method="post" action="{{ url_for('admin_delete_beer', beer_id=beer.id) }}" style="display:inline">
+                <button type="submit" class="secondary">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No beers yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

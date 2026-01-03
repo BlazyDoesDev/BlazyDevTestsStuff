@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="card">
+  {% if beer.image_url %}
+    <img src="{{ beer.image_url }}" alt="{{ beer.name }}" />
+  {% endif %}
+  <div class="badge">{{ beer.style }}</div>
+  <h2>{{ beer.name }}</h2>
+  <p>{{ beer.description or "No tasting notes yet." }}</p>
+  <p><strong>Tavern:</strong> {{ beer.tavern or "Unknown" }}</p>
+  <p><strong>ABV:</strong> {{ beer.abv or "-" }}%</p>
+  <p><strong>Rating:</strong> {{ beer.rating or "-" }}/5</p>
+  <a class="button secondary" href="{{ url_for('index') }}">Back to tap list</a>
+</article>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <h2>Edit Brew</h2>
+</section>
+
+<section class="card">
+  <form method="post">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" value="{{ beer.name }}" required />
+    </div>
+    <div>
+      <label for="style">Style</label>
+      <input id="style" name="style" value="{{ beer.style }}" required />
+    </div>
+    <div>
+      <label for="abv">ABV</label>
+      <input id="abv" name="abv" type="number" step="0.1" value="{{ beer.abv }}" />
+    </div>
+    <div>
+      <label for="rating">Rating (1-5)</label>
+      <input id="rating" name="rating" type="number" min="1" max="5" value="{{ beer.rating }}" />
+    </div>
+    <div>
+      <label for="tavern">Tavern</label>
+      <input id="tavern" name="tavern" value="{{ beer.tavern }}" />
+    </div>
+    <div>
+      <label for="image_url">Image URL</label>
+      <input id="image_url" name="image_url" type="url" value="{{ beer.image_url }}" />
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="description">{{ beer.description }}</textarea>
+    </div>
+    <button type="submit">Save Changes</button>
+    <a class="button secondary" href="{{ url_for('admin_dashboard') }}">Cancel</a>
+  </form>
+</section>
+{% endblock %}
