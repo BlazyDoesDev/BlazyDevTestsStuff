@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <h2>Admin Portal</h2>
+  <p>Use your tavern master credentials to manage the taps.</p>
+</section>
+
+<section class="card">
+  <form method="post">
+    <div>
+      <label for="username">Username</label>
+      <input id="username" name="username" required />
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required />
+    </div>
+    <button type="submit">Enter Cellar</button>
+  </form>
+</section>
+{% endblock %}

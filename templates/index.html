@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <h2>Welcome to the Tavern Taps</h2>
+  <p>
+    Browse the enchanted beer list, swap tales, and keep your adventuring party
+    hydrated with the finest brews in the realm.
+  </p>
+</section>
+
+<section class="grid">
+  {% if beers %}
+    {% for beer in beers %}
+      <article class="card">
+        {% if beer.image_url %}
+          <img src="{{ beer.image_url }}" alt="{{ beer.name }}" />
+        {% else %}
+          <img
+            src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=800&q=80"
+            alt="Mug of ale"
+          />
+        {% endif %}
+        <div class="badge">{{ beer.style }}</div>
+        <h3>{{ beer.name }}</h3>
+        <p>{{ beer.description or "No tasting notes yet." }}</p>
+        <p><strong>Tavern:</strong> {{ beer.tavern or "Unknown" }}</p>
+        <a class="button secondary" href="{{ url_for('beer_detail', beer_id=beer.id) }}">
+          View Details
+        </a>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p>No beers tapped yet. Log in as admin to add your first brew.</p>
+  {% endif %}
+</section>
+{% endblock %}

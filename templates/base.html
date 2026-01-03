@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tavern Taps</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <header>
+      <h1>🍺 Tavern Taps</h1>
+      <nav>
+        <a href="{{ url_for('index') }}">Tap List</a>
+        {% if session.get('is_admin') %}
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+        <a href="{{ url_for('admin_logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for('admin_login') }}">Admin Login</a>
+        {% endif %}
+      </nav>
+    </header>
+    <main>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <p>Crafted for your fantasy tavern campaigns.</p>
+    </footer>
+  </body>
+</html>
